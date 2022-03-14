@@ -180,7 +180,7 @@ public class EntryPointUtil {
 				String subSignature = md.getSubSignature();
 				SootMethod entryMethod = entryClass.getMethod(subSignature);
 				entryPoints.add(entryMethod);
-//				System.out.println("Loading " + entryMethod);
+//				System.out.println("[" + new java.util.Date() + "]" + "Loading " + entryMethod);
 			}
 		}
 		return entryPoints;

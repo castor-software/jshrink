@@ -53,7 +53,7 @@ public class JMTraceRunner extends TamiFlexRunner{
 	@Override
 	public void run() throws IOException{
 		if(!this.resolvePath()){
-			System.err.println("[JMTraceRunner] Error: the JMTrace lib or jar does not exist in " + mtraceLibPath);
+			System.out.println("[JMTraceRunner] Error: the JMTrace lib or jar does not exist in " + mtraceLibPath);
 			return;
 		}
 
@@ -158,7 +158,7 @@ public class JMTraceRunner extends TamiFlexRunner{
 		}
 
 		else {
-			System.err.println("[JMTraceRunner] Error: There is no jmtrace log file - " + log_path);
+			System.out.println("[JMTraceRunner] Error: There is no jmtrace log file - " + log_path);
 		}
 
 		//super.analyze(module, log);

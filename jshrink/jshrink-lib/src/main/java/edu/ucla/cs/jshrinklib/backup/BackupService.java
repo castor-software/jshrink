@@ -32,7 +32,7 @@ public class BackupService {
 		}
 		Checkpoint c= checkpoints.get(checkpoints.size()-1);
 		if(this.isVerbose){
-			System.out.println("Removing checkpoint- "+c.transformation);
+			System.out.println("[" + new java.util.Date() + "]" + "Removing checkpoint- "+c.transformation);
 		}
 		c.delete();
 		checkpoints.remove(c);
@@ -49,7 +49,7 @@ public class BackupService {
 	public boolean revertToLast(){
 		Checkpoint c = checkpoints.get(checkpoints.size()-1);
 		if(!c.rollBackToBackup()) {
-			System.err.println("Failed to copy checkpoint files to original directory for checkpoint - " + c.transformation);
+			System.out.println("Failed to copy checkpoint files to original directory for checkpoint - " + c.transformation);
 			return false;
 		}
 		return true;

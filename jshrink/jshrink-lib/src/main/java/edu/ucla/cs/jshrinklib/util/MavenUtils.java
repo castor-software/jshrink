@@ -37,7 +37,7 @@ public class MavenUtils {
 					String cp = lines[i+1];
 					cp_map.put(name, cp);
 				} else {
-					System.err.println("Cannot find the name of "
+					System.out.println("Cannot find the name of "
 						+ "this project/module when resolving classpaths.");
 				}
 			}

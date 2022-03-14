@@ -38,7 +38,7 @@ public class ConstantPoolScanner {
                 outputStream.add(javapParse(line));
             }
             catch(Exception e){
-                System.err.println("Could not parse line "+line+ " for class "+clazz.getAbsolutePath());
+                System.out.println("Could not parse line "+line+ " for class "+clazz.getAbsolutePath());
                 e.printStackTrace();
             }
         }

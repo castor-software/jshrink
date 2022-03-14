@@ -148,7 +148,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			reader.close();
 			
 			if(maven_log.contains("BUILD FAILURE")) {
-				System.err.println("'mvn clean' fails.");
+				System.out.println("'mvn clean' fails.");
 			}
 
 			try {
@@ -188,7 +188,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			 int exitValue;
 			 if(this.compileProject) {
 			 	if(this.verbose){
-			 		System.out.println("Compiling project...");
+			 		System.out.println("[" + new java.util.Date() + "]" + "Compiling project...");
 			    }
 				 // Ensure the project is compiled.
 				 // Prepare the command and its arguments in a String array in case there is a space or special
@@ -217,13 +217,13 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 					 throw new IOException("Build failed! Output the following " + System.lineSeparator() + output);
 				 }
 				 if(this.verbose){
-					 System.out.println("Done compiling project!");
+					 System.out.println("[" + new java.util.Date() + "]" + "Done compiling project!");
 				 }
 			 }
 
 			 if(this.runTests) {
 				 if (this.verbose) {
-					 System.out.println("Running project tests...");
+					 System.out.println("[" + new java.util.Date() + "]" + "Running project tests...");
 				 }
 
 				 cmd = new String[]{"mvn", "-f", pomFile.getAbsolutePath(), "surefire:test",
@@ -247,12 +247,12 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 				 this.testOutput = MavenUtils.testOutputFromString(maven_log);
 
 				 if (this.verbose) {
-					 System.out.println("Done running project tests!");
+					 System.out.println("[" + new java.util.Date() + "]" + "Done running project tests!");
 				 }
 			 }
 
 			if(this.verbose){
-				System.out.println("Getting dependency information...");
+				System.out.println("[" + new java.util.Date() + "]" + "Getting dependency information...");
 			}
 			// first get the full classpath (compile scope + test scope) so that we will get a more complete
 			// call graph in the static analysis later
@@ -278,11 +278,11 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			}
 
 			if(this.verbose){
-				System.out.println("Done getting dependency information!");
+				System.out.println("[" + new java.util.Date() + "]" + "Done getting dependency information!");
 			}
 
 			if(this.verbose){
-				System.out.println("Getting compile scope dependency information...");
+				System.out.println("[" + new java.util.Date() + "]" + "Getting compile scope dependency information...");
 			}
 			
 			// then get the classpath of the compile scope only for the future method removal
@@ -308,7 +308,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			}
 
 			if(this.verbose){
-				System.out.println("Done getting compile scope dependency information!");
+				System.out.println("[" + new java.util.Date() + "]" + "Done getting compile scope dependency information!");
 			}
 
 		}catch(IOException | InterruptedException e){
@@ -326,7 +326,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			if(classpaths.containsKey(artifact_id)) {
 
 				if(this.verbose){
-					System.out.println("Getting classpath information for module \"" + artifact_id +"\"...");
+					System.out.println("[" + new java.util.Date() + "]" + "Getting classpath information for module \"" + artifact_id +"\"...");
 				}
 
 				String cp = classpaths.get(artifact_id);
@@ -369,7 +369,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 					}
 				}
 				if(this.verbose){
-					System.out.println("Done getting classpath information for module \"" + artifact_id +"\"!");
+					System.out.println("[" + new java.util.Date() + "]" + "Done getting classpath information for module \"" + artifact_id +"\"!");
 				}
 
 			}
@@ -406,7 +406,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			if(classpaths.containsKey(artifact_id)) {
 
 				if(this.verbose){
-					System.out.println("Running callgraph analysis for module \"" + artifact_id +"\"...");
+					System.out.println("[" + new java.util.Date() + "]" + "Running callgraph analysis for module \"" + artifact_id +"\"...");
 				}
 				
 				// increment the count of analyzed modules
@@ -499,7 +499,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 				G.reset();
 
 				if(this.verbose){
-					System.out.println("Done running callgraph analysis for module \"" + artifact_id +"\"!");
+					System.out.println("[" + new java.util.Date() + "]" + "Done running callgraph analysis for module \"" + artifact_id +"\"!");
 				}
 			}
 		}
@@ -507,7 +507,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 		log.append("static_analysis_time," + Long.toString(callgraphTimeSeconds) + System.lineSeparator());
 
 		if(this.verbose){
-			System.out.println("Running Dynamic analysis...");
+			System.out.println("[" + new java.util.Date() + "]" + "Running Dynamic analysis...");
 		}
 		// (optional) use tamiflex to dynamically identify reflection calls
 		long dynamicTimeTotal = 0;
@@ -740,7 +740,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 				}
 			}
 			if(this.verbose){
-				System.out.println("Done running dynamic analysis!");
+				System.out.println("[" + new java.util.Date() + "]" + "Done running dynamic analysis!");
 			}
 
 			log.append("dynamic_analysis_time," + Long.toString(dynamicTimeTotal) + System.lineSeparator());
@@ -750,7 +750,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 			// static analysis
 			for(String module : new_entry_points.keySet()) {
 				if(this.verbose){
-					System.out.println("Running Tamiflex callgraph analysis for module \"" + module +"\"...");
+					System.out.println("[" + new java.util.Date() + "]" + "Running Tamiflex callgraph analysis for module \"" + module +"\"...");
 				}
 				HashSet<MethodData> entry_methods = new_entry_points.get(module);
 				
@@ -811,7 +811,7 @@ public class MavenSingleProjectAnalyzer implements IProjectAnalyser {
 				G.reset();
 
 				if(this.verbose){
-					System.out.println("Done running Tamiflex callgraph analysis for module \"" + module +"\"!");
+					System.out.println("[" + new java.util.Date() + "]" + "Done running Tamiflex callgraph analysis for module \"" + module +"\"!");
 				}
 			}
 			log.append("dynamic_callgraph_extension_time," + Long.toString(callGraphDynamicTime) + System.lineSeparator());

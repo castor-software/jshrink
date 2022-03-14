@@ -20,7 +20,7 @@ public class Checkpoint {
 
 	private boolean runTests(){
 		if (this.isVerbose) {
-			System.out.println("Running project tests for checkpoint "+this.transformation+" ...");
+			System.out.println("[" + new java.util.Date() + "]" + "Running project tests for checkpoint "+this.transformation+" ...");
 		}
 		this.testsPassed = false;
 		String[] cmd;
@@ -62,7 +62,7 @@ public class Checkpoint {
 
 		if (this.isVerbose) {
 			//System.out.println(maven_log);
-			System.out.println("Done running project tests for "+transformation+" !");
+			System.out.println("[" + new java.util.Date() + "]" + "Done running project tests for "+transformation+" !");
 		}
 
 		return this.testsPassed;
@@ -95,7 +95,7 @@ public class Checkpoint {
 			copyFiles(this.oldPath, this.backupPath);
 		}
 		catch(Exception e){
-			System.err.println(e.getMessage());
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -113,7 +113,7 @@ public class Checkpoint {
 		this.timestamp = java.time.Instant.now();
 		this.isValid = true;
 		if(this.isVerbose){
-			System.out.println("Created checkpoint "+transformation+" - "+this.getBackupPath()+" for "+this.getRealPath()+" at "+this.timestamp);
+			System.out.println("[" + new java.util.Date() + "]" + "Created checkpoint "+transformation+" - "+this.getBackupPath()+" for "+this.getRealPath()+" at "+this.timestamp);
 		}
 	}
 
@@ -129,7 +129,7 @@ public class Checkpoint {
 			e.printStackTrace();
 		}
 		if(this.isVerbose){
-			System.out.println("Rolled back "+this.getBackupPath()+" to "+this.getRealPath()+" at "+java.time.Instant.now());
+			System.out.println("[" + new java.util.Date() + "]" + "Rolled back "+this.getBackupPath()+" to "+this.getRealPath()+" at "+java.time.Instant.now());
 		}
 		return this.rollBack;
 	}

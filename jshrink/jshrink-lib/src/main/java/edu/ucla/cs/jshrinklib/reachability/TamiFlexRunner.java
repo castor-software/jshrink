@@ -61,7 +61,7 @@ public class TamiFlexRunner {
 			// a relative path will not work
 			this.tamiflex_path = tamiflex_jar.getAbsolutePath();
 		} else {
-			System.err.println("[TamiFlexRunner] Error: the TamiFlex jar does not exist in " + tamiflex_path);
+			System.out.println("[TamiFlexRunner] Error: the TamiFlex jar does not exist in " + tamiflex_path);
 			return;
 		}
 		
@@ -103,9 +103,9 @@ public class TamiFlexRunner {
 				boolean testResult = runMavenTest();
 				/*if(Application.isDebugMode() || Application.isVerboseMode()) {
 					if(testResult) {
-						System.out.println("[TamiFlexRunner] mvn test succeeds.");
+						System.out.println("[" + new java.util.Date() + "]" + "[TamiFlexRunner] mvn test succeeds.");
 					} else {
-						System.out.println("[TamiFlexRunner] mvn test fails.");
+						System.out.println("[" + new java.util.Date() + "]" + "[TamiFlexRunner] mvn test fails.");
 					}
 				}*/
 			}
@@ -141,7 +141,7 @@ public class TamiFlexRunner {
 				/*File target_folder = new File(dir.getAbsolutePath() + File.separator + "target");
 				File test_folder = new File(target_folder.getAbsolutePath() + File.separator + "test-classes");
 				if(target_folder.exists() && test_folder.exists()) {
-					System.err.println("[TamiFlexRunner] Error: TamiFlex does not run successfully. "
+					System.out.println("[TamiFlexRunner] Error: TamiFlex does not run successfully. "
 							+ "No output folder exists in " + dir.getAbsolutePath());
 				}*/
 			}
@@ -286,7 +286,7 @@ public class TamiFlexRunner {
 				e.printStackTrace();
 			}
 		} else {
-			System.err.println("[TamiFlexRunner] Error: There is no TamiFlex log file - " + log);
+			System.out.println("[TamiFlexRunner] Error: There is no TamiFlex log file - " + log);
 		}
 	}
 	
@@ -389,7 +389,7 @@ public class TamiFlexRunner {
         					Node project_node = nodes4.item(0);
         					project_node.appendChild(build_node);
         				} else {
-        					System.err.println("[TamiFlexRunner] There are zero or multiple project nodes in the POM file. "
+        					System.out.println("[TamiFlexRunner] There are zero or multiple project nodes in the POM file. "
         							+ "Please double check if it is correct.");
         				}
         			} else if (nodes3.getLength() == 1){
@@ -397,7 +397,7 @@ public class TamiFlexRunner {
         				Node build_node = nodes3.item(0);
         				build_node.appendChild(plugins_node);
         			} else {
-        				System.err.println("[TamiFlexRunner] There are multiple build nodes within the project node in the POM file. "
+        				System.out.println("[TamiFlexRunner] There are multiple build nodes within the project node in the POM file. "
     							+ "Please double check if it is correct.");
         			}
         		} else if (nodes2.getLength() == 1) {
@@ -405,7 +405,7 @@ public class TamiFlexRunner {
         			Node plugins_node = nodes2.item(0);
         			plugins_node.appendChild(plugin_node);
         		} else {
-        			System.err.println("[TamiFlexRunner] There are multiple plugins nodes within the build node in the POM file. "
+        			System.out.println("[TamiFlexRunner] There are multiple plugins nodes within the build node in the POM file. "
 							+ "Please double check if the POM file is correct.");
         		}
             } else if (nodes.getLength() == 1) {
@@ -464,7 +464,7 @@ public class TamiFlexRunner {
             	}
             } else {
             	// is it possible to have two sunfire plugins？
-            	System.err.println("[TamiFlexRunner] There are more than one sunfire plugin in the POM file. "
+            	System.out.println("[TamiFlexRunner] There are more than one sunfire plugin in the POM file. "
             			+ "Please double check if it is correct.");
             }
             

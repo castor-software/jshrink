@@ -667,11 +667,11 @@ public class JShrink {
 		long libSizeAfter = this.getLibSize(true);
 
 		if(appSizeAfter != appSizeBefore){
-			System.out.println("WARNING: App Size Differs before and after running 'setup'");
+			System.out.println("[" + new java.util.Date() + "]" + "WARNING: App Size Differs before and after running 'setup'");
 		}
 
 		if(libSizeAfter != libSizeBefore){
-			System.out.println("WARNING: Lib Size Differs before and after running 'setup'");
+			System.out.println("[" + new java.util.Date() + "]" + "WARNING: Lib Size Differs before and after running 'setup'");
 		}
 	}
 
@@ -702,13 +702,13 @@ public class JShrink {
 					if(verbose) {
 						// we will not update the class since it will cause exceptions when writing out to bytecode based on
 						// the first soot pass. But this may cause a problem when loading or running the unmodified class.
-						System.out.println("Attempting to update an unmodifiable class " + sootClass.getName());
+						System.out.println("[" + new java.util.Date() + "]" + "Attempting to update an unmodifiable class " + sootClass.getName());
 					}
 				} else {
 					ClassFileUtils.writeClass(sootClass, classPaths);
 				}
 			} catch (IOException e) {
-				System.err.println("An exception was thrown when attempting to rewrite a class:");
+				System.out.println("An exception was thrown when attempting to rewrite a class:");
 				e.printStackTrace();
 				System.exit(1);
 			}
@@ -752,7 +752,7 @@ public class JShrink {
 				this.classDependencyGraph.addClass(sootClass.getName(), PathResolutionUtil.getClassPath(sootClass.getName()));
 			}
 			if(this.verbose)
-				System.out.println("Resolved dependencies in "+Duration.between(Instant.now(),start).getSeconds());
+				System.out.println("[" + new java.util.Date() + "]" + "Resolved dependencies in "+Duration.between(Instant.now(),start).getSeconds());
 		}
 
 		for(SootClass sootClass : classesToRemove){
@@ -787,7 +787,7 @@ public class JShrink {
 					ClassFileUtils.removeClass(sootClass, classPaths);
 				}
 			} catch (IOException e){
-				System.err.println("An exception was thrown when attempting to delete a class:");
+				System.out.println("An exception was thrown when attempting to delete a class:");
 				e.printStackTrace();
 				System.exit(1);
 			}

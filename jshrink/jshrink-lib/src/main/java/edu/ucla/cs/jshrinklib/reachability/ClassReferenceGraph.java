@@ -46,7 +46,7 @@ public class ClassReferenceGraph implements Serializable {
             addClass(className, this.getConstantPoolReferences(classPath));
         }
         catch (Exception e) {
-            System.err.println("An an exception was thrown while getting references for Class "+className+" at "+classPath);
+            System.out.println("An an exception was thrown while getting references for Class "+className+" at "+classPath);
             e.printStackTrace();
             //System.exit(1);
         }
@@ -64,7 +64,7 @@ public class ClassReferenceGraph implements Serializable {
             addClass(sc.getName(), this.getSootReferences(sc));
         }
         catch (Exception e) {
-            System.err.println("An an exception was thrown while getting references for Class "+sc.getName());
+            System.out.println("An an exception was thrown while getting references for Class "+sc.getName());
             e.printStackTrace();
             //System.exit(1);
         }

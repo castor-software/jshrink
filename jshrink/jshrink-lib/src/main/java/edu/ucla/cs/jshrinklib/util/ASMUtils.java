@@ -32,7 +32,7 @@ public class ASMUtils {
                 	continue;
                 } catch (IOException ex){
 	                //Not sure if here is the best way to handle it, but ok for the meantime
-                    System.err.println("An an exception was thrown when reading data from .jar file:");
+                    System.out.println("An an exception was thrown when reading data from .jar file:");
                     ex.printStackTrace();
                     System.exit(1);
                 }
@@ -45,7 +45,7 @@ public class ASMUtils {
     	
     	if(!dirPath.exists()) {
     		// fix NPE due to non-existent file
-    		System.err.println(dirPath.getAbsolutePath() + " does not exist.");
+    		System.out.println(dirPath.getAbsolutePath() + " does not exist.");
     		return;
     	}
     	

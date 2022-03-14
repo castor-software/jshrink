@@ -5,12 +5,12 @@ WORK_LIST="${PWD}/work_list_demo.dat"
 PROJECT_DIR="${PWD}/sample-projects"
 DEBLOAT_APP="${PWD}/jshrink-app-1.0-SNAPSHOT-jar-with-dependencies.jar"
 SIZE_FILE="${PWD}/size_data.csv"
-JAVA="/usr/bin/java"
+JAVA="/usr/local/openjdk-8/bin/java"
 TAMIFLEX="${PWD}/poa-2.0.3.jar"
 JSHRINK_MTRACE="${PWD}/jshrink-mtrace"
 JMTRACE="${JSHRINK_MTRACE}/jmtrace"
 MTRACE_BUILD="${JSHRINK_MTRACE}/build"
-TIMEOUT=54000 #15 hours
+TIMEOUT=540000 #15 hours
 LOG_DIR="${PWD}/output_log"
 OUTPUT_LOG_DIR="${LOG_DIR}/all_transformations_with_tamiflex_and_jmtrace_output_log"
 
@@ -55,10 +55,10 @@ cat ${WORK_LIST} |  while read item; do
 
 	temp_file=$(mktemp /tmp/XXXX)
 
-	timeout ${TIMEOUT} ${JAVA} -Xmx20g -jar ${DEBLOAT_APP} --jmtrace "${MTRACE_BUILD}" --tamiflex ${TAMIFLEX} --maven-project ${item_dir} -T --use-cache --public-entry --main-entry --test-entry --prune-app --class-collapser --inline --remove-fields --remove-methods --log-directory "${ITEM_LOG_DIR}" --verbose 2>&1 >${temp_file} 
+	timeout ${TIMEOUT} ${JAVA} -Xmx20g -jar ${DEBLOAT_APP} --jmtrace "${MTRACE_BUILD}" --tamiflex ${TAMIFLEX} --maven-project ${item_dir} -T --use-cache --public-entry --main-entry --test-entry --prune-app --class-collapser --inline --remove-fields --remove-methods --log-directory "${ITEM_LOG_DIR}" --verbose 2>&1 > ${item_dir}/jshrink_demo.log
 	exit_status=$?
 	if [[ ${exit_status} == 0 ]]; then
-		cat ${temp_file}
+		cat ${item_dir}/jshrink_demo.log
 		echo ""
 		app_size_before=$(cat "${ITEM_LOG_DIR}/log.dat" | awk -F, '($1=="app_size_before"){print $2}')
 		lib_size_before=$(cat "${ITEM_LOG_DIR}/log.dat" | awk -F, '($1=="libs_size_before"){print $2}')
@@ -98,15 +98,15 @@ cat ${WORK_LIST} |  while read item; do
 	elif [[ ${exit_status} == 124 ]];then
 		echo "TIMEOUT!"
 		echo "Output the following: "                           
-                cat ${temp_file}
+                cat ${item_dir}/jshrink_demo.log
 		echo ""
-		rm -rf ${ITEM_LOG_DIR}
+		# rm -rf ${ITEM_LOG_DIR}
 	else
 		echo "Could not properly process "${item}
 		echo "Output the following: "
-		cat ${temp_file}
+		cat ${item_dir}/jshrink_demo.log
 		echo ""
-		rm -rf ${ITEM_LOG_DIR}
+		# rm -rf ${ITEM_LOG_DIR}
 	fi
-	rm ${temp_file}
+	# rm ${temp_file}
 done

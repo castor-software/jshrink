@@ -47,7 +47,7 @@ public class MethodInliner {
 				if (entry.getValue().size() != 1) {
 					if(debug){
 						System.out.println();
-						System.out.println("More than one call location for " + entry.getKey().getSignature());
+						System.out.println("[" + new java.util.Date() + "]" + "More than one call location for " + entry.getKey().getSignature());
 					}
 					continue;
 				}
@@ -57,7 +57,7 @@ public class MethodInliner {
 
 				if(debug){
 					System.out.println();
-					System.out.println("Attempting to inline " + callee.getSignature()
+					System.out.println("[" + new java.util.Date() + "]" + "Attempting to inline " + callee.getSignature()
 						+ " at " + caller.getSignature() + ".");
 				}
 
@@ -65,14 +65,14 @@ public class MethodInliner {
 				if (ClassFileUtils.classInPath(callee.getDeclaringClass().getName(), classpaths).isEmpty()
 					|| ClassFileUtils.classInPath(caller.getDeclaringClass().getName(), classpaths).isEmpty()) {
 					if(debug){
-						System.out.println("FAILED: Caller or Callee not within the current classpath");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: Caller or Callee not within the current classpath");
 					}
 					continue;
 				}
 
 				if(callee.getDeclaringClass().isEnum() || caller.getDeclaringClass().isEnum()){
 					if(debug){
-						System.out.println("FAILED: Caller or Callee is an ENUM.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: Caller or Callee is an ENUM.");
 					}
 					continue;
 				}
@@ -85,7 +85,7 @@ public class MethodInliner {
 					&& (caller.getDeclaringClass().getName().contains("$")
 					|| callee.getDeclaringClass().getName().contains("$"))){
 					if(debug){
-						System.out.println("FAILED: Caller or Callee class is an inner class.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: Caller or Callee class is an inner class.");
 					}
 					continue;
 				}
@@ -97,7 +97,7 @@ public class MethodInliner {
 				} catch (Exception e) {
 					//This is a catch all --- if the methods can't be retrieved, we can't inline them.
 					if(debug){
-						System.out.println("FAILED: Cannot retrieve active body for caller or callee.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: Cannot retrieve active body for caller or callee.");
 					}
 					continue;
 				}
@@ -112,7 +112,7 @@ public class MethodInliner {
 					for (String classRef : classRefs) {
 						if (classRef.startsWith(callee.getDeclaringClass().getName() + "$")) {
 							if (debug) {
-								System.out.println("FAILED: Callee contains reference to inner class field/method.");
+								System.out.println("[" + new java.util.Date() + "]" + "FAILED: Callee contains reference to inner class field/method.");
 							}
 							incompatibleRef = true;
 							break;
@@ -130,7 +130,7 @@ public class MethodInliner {
 				if(unmodifiableClasses.contains(caller.getDeclaringClass().getName()) ||
 					unmodifiableClasses.contains(callee.getDeclaringClass().getName())) {
 					if(debug){
-						System.out.println("FAILED: Caller or Callee not within modifiable SootClass.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: Caller or Callee not within modifiable SootClass.");
 					}
 					continue;
 				}
@@ -142,7 +142,7 @@ public class MethodInliner {
 				if (callee.isConstructor()) {
 					if (!(caller.getDeclaringClass().equals(callee.getDeclaringClass()) && caller.isConstructor())) {
 						if(debug){
-							System.out.println("FAILED: Callee is a constructor.");
+							System.out.println("[" + new java.util.Date() + "]" + "FAILED: Callee is a constructor.");
 						}
 						continue;
 					}
@@ -151,7 +151,7 @@ public class MethodInliner {
 				//We ignore access methods (created by the compiler for inner classes).
 				if (callee.getName().startsWith("access$") || caller.getName().startsWith("access$")) {
 					if(debug) {
-						System.out.println("Caller or Callee is access$ methood");
+						System.out.println("[" + new java.util.Date() + "]" + "Caller or Callee is access$ methood");
 					}
 					continue;
 				}
@@ -165,7 +165,7 @@ public class MethodInliner {
 					 */
 					if(!accessControlsOk(callee, caller.getDeclaringClass())){
 						if(debug){
-							System.out.println("Inlining the callee would violate Java access controls.");
+							System.out.println("[" + new java.util.Date() + "]" + "Inlining the callee would violate Java access controls.");
 						}
 						continue;
 					}
@@ -177,7 +177,7 @@ public class MethodInliner {
 				// There must be exactly 1 inline site in the caller method.
 				if (toInline.size() != 1) {
 					if(debug){
-						System.out.println("FAILED: More than 1 inline site.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: More than 1 inline site.");
 					}
 					continue;
 				}
@@ -204,7 +204,7 @@ public class MethodInliner {
 
 					if(cont){
 						if(debug){
-							System.out.println("Failed: Dynamic Dispatch with more than one candidate.");
+							System.out.println("[" + new java.util.Date() + "]" + "Failed: Dynamic Dispatch with more than one candidate.");
 						}
 						continue;
 					}
@@ -221,7 +221,7 @@ public class MethodInliner {
 				} catch (Exception e) {
 					// suppress the exception and just do not inline this
 					if(debug) {
-						System.out.println("FAILED: exception occurs when checking inline safety.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: exception occurs when checking inline safety.");
 						System.out.println(e.getMessage());
 						System.out.println(e.getStackTrace());
 					}
@@ -230,7 +230,7 @@ public class MethodInliner {
 				}
 				if (!isInlineSafe) {
 					if(debug){
-						System.out.println("FAILED: InlineSafetyManager.ensureInlinability returned false.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: InlineSafetyManager.ensureInlinability returned false.");
 					}
 					continue;
 				}
@@ -241,7 +241,7 @@ public class MethodInliner {
 				} catch (Exception e) {
 					// suppress the exception and just do not inline this
 					if(debug) {
-						System.out.println("FAILED: exception occurs when checking inline efficiency.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: exception occurs when checking inline efficiency.");
 						System.out.println(e.getMessage());
 						System.out.println(e.getStackTrace());
 					}
@@ -250,7 +250,7 @@ public class MethodInliner {
 				}
 				if(!isInlineEfficient){
 					if(debug){
-						System.out.println("FAILED: This inline operation would increase the size of the app.");
+						System.out.println("[" + new java.util.Date() + "]" + "FAILED: This inline operation would increase the size of the app.");
 					}
 					continue;
 				}
@@ -294,7 +294,7 @@ public class MethodInliner {
 				}
 
 				if(debug){
-					System.out.println("SUCCESS!");
+					System.out.println("[" + new java.util.Date() + "]" + "SUCCESS!");
 				}
 			}
 		}while(callgraphChanged);

@@ -16,7 +16,7 @@ public class DependencyLogUtils {
 				Charset.defaultCharset());
 		
 		if(!log2.contains("BUILD SUCCESS")) {
-			System.err.println("Warning: " + name + " is not resolved correctly.");
+			System.out.println("Warning: " + name + " is not resolved correctly.");
 		}
 		// count the number of dependencies
 		String[] log2_lines = log2.split(System.lineSeparator());
@@ -57,7 +57,7 @@ public class DependencyLogUtils {
 				Charset.defaultCharset());
 		
 		if(!log.contains("BUILD SUCCESS")) {
-			System.err.println("Warning: " + name + " is not resolved correctly.");
+			System.out.println("Warning: " + name + " is not resolved correctly.");
 		}
 		// count the number of dependencies
 		String[] log2_lines = log.split(System.lineSeparator());

@@ -41,7 +41,7 @@ public class CallGraphAnalysisCacheWrapper implements IProjectAnalyser {
 
 		if(cache.isPresent() && this.useCache){
 			if(this.verbose){
-				System.out.println("Call graph cache exists (\"" + cache.get().getAbsolutePath() + "\"). Loading...");
+				System.out.println("[" + new java.util.Date() + "]" + "Call graph cache exists (\"" + cache.get().getAbsolutePath() + "\"). Loading...");
 			}
 
 			try{
@@ -54,7 +54,7 @@ public class CallGraphAnalysisCacheWrapper implements IProjectAnalyser {
 			}
 
 			if(this.verbose){
-				System.out.println("Done loading call graph cache.");
+				System.out.println("[" + new java.util.Date() + "]" + "Done loading call graph cache.");
 			}
 
 			this.cga.setAppClassPath(this.appClassPath);
@@ -152,11 +152,11 @@ public class CallGraphAnalysisCacheWrapper implements IProjectAnalyser {
 			cga.run();
 			if(this.useCache) {
 				if(this.verbose){
-					System.out.println("Storing call graph as a cache...");
+					System.out.println("[" + new java.util.Date() + "]" + "Storing call graph as a cache...");
 				}
 				this.createCache();
 				if(this.verbose){
-					System.out.println("Done storing call graph as cache (\""
+					System.out.println("[" + new java.util.Date() + "]" + "Done storing call graph as cache (\""
 							+ this.getCacheFileLocation().getAbsolutePath() + "\")");
 				}
 			}

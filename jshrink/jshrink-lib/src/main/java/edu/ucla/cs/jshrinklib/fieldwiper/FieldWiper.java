@@ -11,7 +11,7 @@ public class FieldWiper {
             owningClass.removeField(field);
 //            if(!SootUtils.modifiableSootClass(owningClass)){
 //                if(verbose) {
-//                    System.out.println("Soot modification error occurs after removing fields in " + owningClass + ". This should not occur");
+//                    System.out.println("[" + new java.util.Date() + "]" + "Soot modification error occurs after removing fields in " + owningClass + ". This should not occur");
 //                }
 //                owningClass.addField(field);
 //                return false;
@@ -20,7 +20,7 @@ public class FieldWiper {
             return true;
 //        } else {
 //            if(verbose) {
-//                System.out.println("Soot modification error occurs before removing fields in " + owningClass + ". This should not occur.");
+//                System.out.println("[" + new java.util.Date() + "]" + "Soot modification error occurs before removing fields in " + owningClass + ". This should not occur.");
 //            }
 //        }
 //        return false;

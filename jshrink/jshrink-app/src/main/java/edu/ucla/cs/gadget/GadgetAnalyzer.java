@@ -57,12 +57,12 @@ public class GadgetAnalyzer {
                 }
             }
 
-            System.out.println("BEFORE_DEBLOATING, " + proj.getName() + ", " + contained_gadget_chains.size() + ", " + contained_gadget_chains.keySet());
+            System.out.println("[" + new java.util.Date() + "]" + "BEFORE_DEBLOATING, " + proj.getName() + ", " + contained_gadget_chains.size() + ", " + contained_gadget_chains.keySet());
 //            for(String gadget_chain_name : contained_gadget_chains.keySet()) {
-//                System.out.println("Gadget chains in " + proj.getName());
-//                System.out.println("\t" + gadget_chain_name + "\t" + contained_gadget_chains.get(gadget_chain_name));
+//                System.out.println("[" + new java.util.Date() + "]" + "Gadget chains in " + proj.getName());
+//                System.out.println("[" + new java.util.Date() + "]" + "\t" + gadget_chain_name + "\t" + contained_gadget_chains.get(gadget_chain_name));
 //            }
-            System.out.println("AFTER_DEBLOATING, " + proj.getName() + ", " + remaining_gadget_chains.size() + ", " + remaining_gadget_chains.keySet());
+            System.out.println("[" + new java.util.Date() + "]" + "AFTER_DEBLOATING, " + proj.getName() + ", " + remaining_gadget_chains.size() + ", " + remaining_gadget_chains.keySet());
         }
     }
 

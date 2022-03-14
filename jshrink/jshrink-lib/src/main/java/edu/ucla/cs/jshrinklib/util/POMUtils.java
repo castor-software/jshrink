@@ -45,7 +45,7 @@ public class POMUtils {
             NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
             if(nodes.getLength() != 1) {
             	// the pom file should not contain more than one artifact id node
-            	System.err.println("There are zero or multiple artifact ids in " + path);
+            	System.out.println("There are zero or multiple artifact ids in " + path);
             } else {
             	artifact_id = nodes.item(0).getTextContent();
             }
@@ -120,7 +120,7 @@ public class POMUtils {
 							Node project_node = nodes4.item(0);
 							project_node.appendChild(build_node);
 						} else {
-							System.err.println("[POMUtils] There are zero or multiple project nodes in the POM file. "
+							System.out.println("[POMUtils] There are zero or multiple project nodes in the POM file. "
 									+ "Please double check if it is correct.");
 						}
 					} else if (nodes3.getLength() == 1){
@@ -128,7 +128,7 @@ public class POMUtils {
 						Node build_node = nodes3.item(0);
 						build_node.appendChild(plugins_node);
 					} else {
-						System.err.println("[POMUtils] There are multiple build nodes within the project node in the POM file. "
+						System.out.println("[POMUtils] There are multiple build nodes within the project node in the POM file. "
 								+ "Please double check if it is correct.");
 					}
 				} else if (nodes2.getLength() == 1) {
@@ -136,7 +136,7 @@ public class POMUtils {
 					Node plugins_node = nodes2.item(0);
 					plugins_node.appendChild(plugin_node);
 				} else {
-					System.err.println("[POMUtils] There are multiple plugins nodes within the build node in the POM file. "
+					System.out.println("[POMUtils] There are multiple plugins nodes within the build node in the POM file. "
 							+ "Please double check if the POM file is correct.");
 				}
 			} else if (nodes.getLength() == 1) {
@@ -192,7 +192,7 @@ public class POMUtils {
 				}
 			} else {
 				// is it possible to have two sunfire plugins？
-				System.err.println("[POMUtils] There are more than one sunfire plugin in the POM file. "
+				System.out.println("[POMUtils] There are more than one sunfire plugin in the POM file. "
 						+ "Please double check if it is correct.");
 			}
 
@@ -269,7 +269,7 @@ public class POMUtils {
 							Node project_node = nodes4.item(0);
 							project_node.appendChild(build_node);
 						} else {
-							System.err.println("[POMUtils] There are zero or multiple project nodes in the POM file. "
+							System.out.println("[POMUtils] There are zero or multiple project nodes in the POM file. "
 									+ "Please double check if it is correct.");
 						}
 					} else if (nodes3.getLength() == 1){
@@ -277,7 +277,7 @@ public class POMUtils {
 						Node build_node = nodes3.item(0);
 						build_node.appendChild(plugins_node);
 					} else {
-						System.err.println("[POMUtils] There are multiple build nodes within the project node in the POM file. "
+						System.out.println("[POMUtils] There are multiple build nodes within the project node in the POM file. "
 								+ "Please double check if it is correct.");
 					}
 				} else if (nodes2.getLength() == 1) {
@@ -285,7 +285,7 @@ public class POMUtils {
 					Node plugins_node = nodes2.item(0);
 					plugins_node.appendChild(plugin_node);
 				} else {
-					System.err.println("[POMUtils] There are multiple plugins nodes within the build node in the POM file. "
+					System.out.println("[POMUtils] There are multiple plugins nodes within the build node in the POM file. "
 							+ "Please double check if the POM file is correct.");
 				}
 			} else if (nodes.getLength() == 1) {
@@ -344,7 +344,7 @@ public class POMUtils {
 				}
 			} else {
 				// is it possible to have two sunfire plugins？
-				System.err.println("[POMUtils] There are more than one sunfire plugin in the POM file. "
+				System.out.println("[POMUtils] There are more than one sunfire plugin in the POM file. "
 						+ "Please double check if it is correct.");
 			}
 

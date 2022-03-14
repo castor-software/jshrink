@@ -37,7 +37,7 @@ public class SootUtils {
 			if(path.exists()) {
 				sb.append(File.pathSeparator + path.getAbsolutePath());
 			} else {
-				System.err.println(path.getAbsolutePath() + " does not exist.");
+				System.out.println(path.getAbsolutePath() + " does not exist.");
 			}
 		}
 		return sb.toString();
@@ -149,7 +149,7 @@ public class SootUtils {
 			if(path.exists()) {
 				dirs.add(path.getAbsolutePath());
 			} else {
-				System.err.println(path.getAbsolutePath() + " does not exist.");
+				System.out.println(path.getAbsolutePath() + " does not exist.");
 			}
 			
 		}
@@ -158,7 +158,7 @@ public class SootUtils {
 			if(path.exists()) {
 				dirs.add(path.getAbsolutePath());
 			} else {
-				System.err.println(path.getAbsolutePath() + " does not exist.");
+				System.out.println(path.getAbsolutePath() + " does not exist.");
 			}
 		}
 

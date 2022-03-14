@@ -24,7 +24,7 @@ class ASMMethodVisitor extends MethodVisitor {
 
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-		//System.out.println("visitAnnotation: desc="+desc+" visible="+visible);
+		//System.out.println("[" + new java.util.Date() + "]" + "visitAnnotation: desc="+desc+" visible="+visible);
 		this.currentMethod.setAnnotation(Type.getType(desc).getClassName());
 		return null;//super.visitAnnotation(desc, visible);
 	}

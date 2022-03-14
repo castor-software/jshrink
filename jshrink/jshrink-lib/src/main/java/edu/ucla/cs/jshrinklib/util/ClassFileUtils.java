@@ -235,9 +235,9 @@ public class ClassFileUtils {
 	public static void compressJars(Set<File> decompressedJars) throws IOException {
 		for(File file : decompressedJars){
 			if(!file.exists()){
-				System.out.println("File '" + file.getAbsolutePath() + "' does not exist");
+				System.out.println("[" + new java.util.Date() + "]" + "File '" + file.getAbsolutePath() + "' does not exist");
 			} else if(!file.isDirectory()){
-				System.out.println("File '" + file.getAbsolutePath() + "' is not a directory");
+				System.out.println("[" + new java.util.Date() + "]" + "File '" + file.getAbsolutePath() + "' is not a directory");
 			}
 			assert(file.exists() && file.isDirectory());
 			ClassFileUtils.compressJar(file);

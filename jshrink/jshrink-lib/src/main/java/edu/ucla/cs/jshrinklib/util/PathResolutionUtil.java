@@ -48,7 +48,7 @@ public class PathResolutionUtil {
 			prefix = prefix.substring(1);
 		if(!dirPath.exists()) {
 			// fix NPE due to non-existent file
-			System.err.println(dirPath.getAbsolutePath() + " does not exist.");
+			System.out.println(dirPath.getAbsolutePath() + " does not exist.");
 			return;
 		}
 
